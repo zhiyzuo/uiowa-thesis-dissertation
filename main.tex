@@ -1,0 +1,214 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+ \geometry{
+ letterpaper,
+ left=2.54cm,
+ right=2.54cm,
+ bottom=2.54cm,
+ top=2.54cm,
+ }
+\usepackage[utf8]{inputenc}
+
+%% appendix
+\usepackage{appendix}
+%% biblatex
+\usepackage[style=apa,language=american,maxnames=4,minnames=3,sortcites=true]{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+\addbibresource{ref.bib}
+%% uses times font
+\usepackage{mathptmx}
+%% set fontsize
+\fontsize{12}{1} \selectfont
+%% set line spacing
+\usepackage{setspace}
+\singlespacing
+%% set par indent
+%\usepackage{indentfirst}
+\setlength{\parindent}{6.5ex}
+%% customize heading styles
+\usepackage[indentafter]{titlesec}
+%%%% heading 1
+\titleformat{\section}
+  {\normalsize\center}
+  {}
+  {0pt}
+  {\MakeUppercase}
+%%%% heading 2
+\titleformat{\subsection}
+  {\normalsize\center\bf}
+  {}
+  {0pt}
+  {\capitalize}
+%%%% heading 3
+\titleformat{\subsubsection}
+  {\normalsize\bf}
+  {}
+  {0pt}
+  {\capitalize}
+%\titleformat{⟨command⟩}[⟨shape⟩]{⟨format⟩}{⟨label⟩}{⟨sep⟩}{⟨before-code⟩}[⟨after-code⟩]
+
+%%%%%% start: define some macros here %%%%%%
+\newcommand{\longvertspacing}{~\\~\\~\\~\\~\\~\\}
+\newcommand{\mylinespacing}{\vspace{1em}}
+\newcommand{\myoptpg}{\textbf{THIS PAGE IS OPTIONAL}}
+\newcommand{\mytitle}{my dissertation title}
+\newcommand{\myname}{Zhiya Zuo}
+\newcommand{\mydegree}{DEGREE NAME}
+\newcommand{\myprogram}{PROGRAM NAME}
+\newcommand{\mymonth}{May}
+\newcommand{\myyear}{2019}
+\newcommand{\myadvisor}{Associate Professor Kang Zhao}
+%% a new center environment
+\newenvironment{tightcenter}{%
+  \setlength\topsep{0pt}
+  \setlength\parskip{0pt}
+  \begin{center}
+}{%
+  \end{center}
+}
+%% adjust quotation environment margin
+\renewenvironment{quote}{%
+   \list{}{%
+     \leftmargin0cm   % this is the adjusting screw
+     \rightmargin\leftmargin
+   }
+   \item\relax
+}
+{\endlist}
+%%%%%% end: define some macros here %%%%%%
+
+%%%%%% capitalize from stackexchange %%%%%% 
+\usepackage{ifxetex}
+
+\usepackage{xparse}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\capitalize}{>{\SplitList{~}}m}
+ {
+  \seq_clear:N \l_capitalize_words_seq
+  \ProcessList{#1}{\CapitalizeFirst}
+  \seq_use:Nn \l_capitalize_words_seq { ~ }
+ }
+\NewDocumentCommand{\CapitalizeFirst}{m}
+ {
+  \capitalize_word:n { #1 }
+ }
+
+\sys_if_engine_pdftex:TF
+ {
+  \cs_set_eq:Nc \capitalize_tl_set:Nn { protected@edef }
+ }
+ {
+  \cs_set_eq:NN \capitalize_tl_set:Nn \tl_set:Nn
+ }
+
+\cs_new_protected:Nn \capitalize_word:n
+ {
+  \capitalize_tl_set:Nn \l_capitalize_word_tl { #1 }
+  \seq_if_in:NfTF \g_capitalize_exceptions_seq { \tl_to_str:n { #1 } }
+   % exception word
+   { \seq_put_right:Nn \l_capitalize_words_seq { #1 } } % exception word
+   % to be uppercased
+   { \seq_put_right:Nx \l_capitalize_words_seq { \tl_mixed_case:V \l_capitalize_word_tl } }
+ }
+\cs_generate_variant:Nn \tl_mixed_case:n { V }
+\NewDocumentCommand{\AppendToList}{m}
+ {
+  \clist_map_inline:nn { #1 }
+   {
+    \seq_gput_right:Nx \g_capitalize_exceptions_seq { \tl_to_str:n { ##1 } }
+   }
+ }
+\cs_generate_variant:Nn \seq_if_in:NnTF { Nf }
+\seq_new:N \l_capitalize_words_seq
+\seq_new:N \g_capitalize_exceptions_seq
+\ExplSyntaxOff
+
+\AppendToList{a,is,of,óf}
+%%%%%% capitalize from stackexchange %%%%%% 
+
+\title{\MakeUppercase{\normalsize\mytitle}\vspace{-2em}}
+\author{\vspace{-5ex}}
+\date{\vspace{-5ex}}
+
+\begin{document}
+
+\maketitle
+\longvertspacing
+\begin{tightcenter}
+    by
+\end{tightcenter}
+\mylinespacing
+\begin{tightcenter}
+    \myname
+\end{tightcenter}
+\longvertspacing
+\begin{tightcenter}
+A thesis submitted in partial fulfillment \\
+of the requirements for the \\
+\mydegree~\\
+degree in \myprogram~in the  \\
+Graduate College of \\
+The University of Iowa
+\end{tightcenter}
+\mylinespacing
+\begin{tightcenter}
+\mymonth~\myyear
+\end{tightcenter}
+\mylinespacing
+\begin{tightcenter}
+Thesis Supervisor: \myadvisor
+\end{tightcenter}
+
+%% copyright page %%
+\include{1_copyright}
+%% copyright page %%
+
+%% dedication page %%
+\include{2_dedication}
+%% dedication page %%
+
+%% epigraph page %%
+\include{3_epigraph}
+%% epigraph page %%
+
+%% ack page %%
+\include{4_ack}
+%% ack page %%
+
+%% abs page %%
+\include{5_abs}
+%% abs page %%
+
+%% public abs page %%
+\include{6_public_abs}
+%% public abs page %%
+
+%% content lists %%
+\include{7_toc}
+%% content lists %%
+
+%% preface %%
+\include{8_preface}
+%% preface %%
+
+\begin{doublespace}
+%% main contents %%
+\include{9_chap_1}
+%% main contents %%
+
+%% ref %%
+\printbibliography
+%% ref %%
+
+%% appendix %%
+\appendix
+\include{9_chap_a}
+\include{9_chap_b}
+%% appendix %%
+
+
+\end{doublespace}
+
+
+\end{document}
