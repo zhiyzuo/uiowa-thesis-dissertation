@@ -9,6 +9,58 @@
  }
 \usepackage[utf8]{inputenc}
 
+%% ref related
+\usepackage{varioref}
+\usepackage[linktocpage=true]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+%% toc
+\usepackage{tocloft}
+%%% dots: https://tex.stackexchange.com/questions/53898/how-to-get-lines-with-dots-in-the-table-of-contents-for-sections
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
+%%% adjust sectional unit title fonts in toc
+\renewcommand{\cftsecfont}{\normalfont\MakeUppercase} 
+\renewcommand{\cftsubsecfont}{\normalfont\bfseries\capitalize}
+%%% use figure/table.num for the lot and lof
+%\renewcommand{\cftfigfont}{Figure~\alph{fig}.}
+%% source: https://tex.stackexchange.com/questions/419103/how-to-change-the-numbering-style-in-list-of-table-and-list-of-figures
+\renewcommand{\cftfigpresnum}{Figure}
+\renewcommand{\cftfigaftersnum}{.}
+\renewcommand{\cfttabpresnum}{Table}
+\renewcommand{\cfttabaftersnum}{.}
+%%% increase spacing between entries in toc
+\setlength{\cftparskip}{2ex}
+%%% decrease spacing between number and title as well as indent
+\setlength{\cftfignumwidth}{9ex}
+\setlength{\cfttabnumwidth}{8ex}
+\setlength{\cftfigindent}{0ex}
+\setlength{\cfttabindent}{0ex}
+%%% title names
+%\renewcommand{\contentsname}{TABLE OF CONTENTS}
+%%% center uppercase toc titles
+%\renewcommand{\cfttoctitlefont}{\hfill\normalsize\MakeUppercase}
+%\renewcommand{deed5re5dreeeesecftaftertoctitle}{\hfill}
+\renewcommand{\cftlottitlefont}{\hfill\normalsize\MakeUppercase}
+\renewcommand{\cftafterlottitle}{\hfill}
+\renewcommand{\cftloftitlefont}{\hfill\normalsize\MakeUppercase}
+\renewcommand{\cftafterloftitle}{\hfill}
+%% this package binds all indices to toc
+\usepackage{tocbibind}
+%%% remove toc numbering
+\makeatletter
+\let\latexl@section\l@section
+\def\l@section#1#2{\begingroup\let\numberline\@gobble\latexl@section{#1}{#2}\endgroup}
+\let\latexl@subsection\l@subsection
+\def\l@subsection#1#2{\begingroup\let\numberline\@gobble\latexl@subsection{#1}{#2}\endgroup}
+\makeatother
+%% set figure path
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+%% captions
+\usepackage{boxhandler}
+%\usepackage{caption}
+%\captionsetup{labelsep=space,justification=justified,singlelinecheck=off}
 %% appendix
 \usepackage{appendix}
 %% biblatex
@@ -134,6 +186,10 @@
 \begin{document}
 
 \maketitle
+
+%% roman for frontmatter
+\pagenumbering{roman}
+%\thispagestyle{empty}
 \longvertspacing
 \begin{tightcenter}
     by
@@ -161,9 +217,12 @@ Thesis Supervisor: \myadvisor
 \end{tightcenter}
 
 %% copyright page %%
+
 \include{1_copyright}
 %% copyright page %%
 
+\pagenumbering{roman} 
+\setcounter{page}{2}
 %% dedication page %%
 \include{2_dedication}
 %% dedication page %%
@@ -192,13 +251,20 @@ Thesis Supervisor: \myadvisor
 \include{8_preface}
 %% preface %%
 
+%% arabic for the rest
+\pagenumbering{arabic}
+
 \begin{doublespace}
 %% main contents %%
 \include{9_chap_1}
+\include{9_chap_2}
+\include{9_chap_3}
 %% main contents %%
 
 %% ref %%
-\printbibliography
+\newpage
+\section{reference}
+\printbibliography[heading=none]
 %% ref %%
 
 %% appendix %%
