@@ -4,6 +4,11 @@
 \renewcommand{\thetable}{\hbAppendixPrefix.\arabic{table}} 
 \setcounter{table}{0}
 
+\let\svaddcontentsline\addcontentsline
+\renewcommand\addcontentsline[3]{%
+      \ifthenelse{\equal{#1}{lof}}{}%
+        {\ifthenelse{\equal{#1}{lot}}{}{\svaddcontentsline{#1}{#2}{#3}}}}
+
 \section{APPENDIX \hbAppendixPrefix: Test for appendix}
 
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Ut purus elit, vestibulum ut, placeratac,  adipiscing vitae,  felis.   Curabitur dictum gravida mauris.  

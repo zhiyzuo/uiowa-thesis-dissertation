@@ -1,4 +1,18 @@
 \documentclass[12pt]{article}
+
+%%%%%% start: define some names here %%%%%%
+\newcommand{\longvertspacing}{~\\~\\~\\~\\~\\~\\}
+\newcommand{\mylinespacing}{\vspace{1em}}
+\newcommand{\myoptpg}{\textbf{THIS PAGE IS OPTIONAL}}
+\newcommand{\mytitle}{my dissertation title}
+\newcommand{\myname}{Zhiya Zuo}
+\newcommand{\mydegree}{\capitalize{my degree name}}
+\newcommand{\myprogram}{\capitalize{my program name}}
+\newcommand{\mymonth}{May}
+\newcommand{\myyear}{2019}
+\newcommand{\myadvisor}{Associate Professor Kang Zhao}
+%%%%%% start: define some names here %%%%%%
+
 \usepackage{geometry}
  \geometry{
  letterpaper,
@@ -21,13 +35,14 @@
 \renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
 %%% adjust sectional unit title fonts in toc
 \renewcommand{\cftsecfont}{\normalfont\MakeUppercase} 
-\renewcommand{\cftsubsecfont}{\normalfont\bfseries\capitalize}
+\renewcommand{\cftsubsecfont}{\normalfont\capitalize}
+\renewcommand{\cftsubsubsecfont}{\normalfont\capitalize}
 %%% use figure/table.num for the lot and lof
 %\renewcommand{\cftfigfont}{Figure~\alph{fig}.}
 %% source: https://tex.stackexchange.com/questions/419103/how-to-change-the-numbering-style-in-list-of-table-and-list-of-figures
-\renewcommand{\cftfigpresnum}{Figure}
+\renewcommand{\cftfigpresnum}{Figure }
 \renewcommand{\cftfigaftersnum}{.}
-\renewcommand{\cfttabpresnum}{Table}
+\renewcommand{\cfttabpresnum}{Table }
 \renewcommand{\cfttabaftersnum}{.}
 %%% increase spacing between entries in toc
 \setlength{\cftparskip}{2ex}
@@ -37,10 +52,11 @@
 \setlength{\cftfigindent}{0ex}
 \setlength{\cfttabindent}{0ex}
 %%% title names
-%\renewcommand{\contentsname}{TABLE OF CONTENTS}
 %%% center uppercase toc titles
-%\renewcommand{\cfttoctitlefont}{\hfill\normalsize\MakeUppercase}
-%\renewcommand{deed5re5dreeeesecftaftertoctitle}{\hfill}
+%% https://tex.stackexchange.com/a/255699/154200
+\renewcommand{\cfttoctitlefont}{\hspace*{\fill}\normalsize\MakeUppercase}
+\renewcommand{\cftaftertoctitle}{\hspace*{\fill}}
+\renewcommand{\contentsname}{table of contents}
 \renewcommand{\cftlottitlefont}{\hfill\normalsize\MakeUppercase}
 \renewcommand{\cftafterlottitle}{\hfill}
 \renewcommand{\cftloftitlefont}{\hfill\normalsize\MakeUppercase}
@@ -99,17 +115,6 @@
   {\capitalize}
 %\titleformat{⟨command⟩}[⟨shape⟩]{⟨format⟩}{⟨label⟩}{⟨sep⟩}{⟨before-code⟩}[⟨after-code⟩]
 
-%%%%%% start: define some macros here %%%%%%
-\newcommand{\longvertspacing}{~\\~\\~\\~\\~\\~\\}
-\newcommand{\mylinespacing}{\vspace{1em}}
-\newcommand{\myoptpg}{\textbf{THIS PAGE IS OPTIONAL}}
-\newcommand{\mytitle}{my dissertation title}
-\newcommand{\myname}{Zhiya Zuo}
-\newcommand{\mydegree}{DEGREE NAME}
-\newcommand{\myprogram}{PROGRAM NAME}
-\newcommand{\mymonth}{May}
-\newcommand{\myyear}{2019}
-\newcommand{\myadvisor}{Associate Professor Kang Zhao}
 %% a new center environment
 \newenvironment{tightcenter}{%
   \setlength\topsep{0pt}
@@ -127,7 +132,6 @@
    \item\relax
 }
 {\endlist}
-%%%%%% end: define some macros here %%%%%%
 
 %%%%%% capitalize from stackexchange %%%%%% 
 \usepackage{ifxetex}
@@ -189,7 +193,7 @@
 
 %% roman for frontmatter
 \pagenumbering{roman}
-%\thispagestyle{empty}
+\thispagestyle{empty}
 \longvertspacing
 \begin{tightcenter}
     by
@@ -263,7 +267,7 @@ Thesis Supervisor: \myadvisor
 
 %% ref %%
 \newpage
-\section{reference}
+\section{references}
 \printbibliography[heading=none]
 %% ref %%
 
