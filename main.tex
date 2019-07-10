@@ -35,19 +35,22 @@
 \renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
 %%% adjust sectional unit title fonts in toc
 \renewcommand{\cftsecfont}{\normalfont\MakeUppercase} 
-\renewcommand{\cftsubsecfont}{\normalfont\capitalize}
-\renewcommand{\cftsubsubsecfont}{\normalfont\capitalize}
+\renewcommand{\cftsubsecfont}{\normalfont}
+\renewcommand{\cftsubsubsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
 %%% use figure/table.num for the lot and lof
 %\renewcommand{\cftfigfont}{Figure~\alph{fig}.}
 %% source: https://tex.stackexchange.com/questions/419103/how-to-change-the-numbering-style-in-list-of-table-and-list-of-figures
 \renewcommand{\cftfigpresnum}{Figure }
-\renewcommand{\cftfigaftersnum}{.}
+\renewcommand{\cftfigaftersnum}{.\hspace{1ex}}
 \renewcommand{\cfttabpresnum}{Table }
-\renewcommand{\cfttabaftersnum}{.}
+\renewcommand{\cfttabaftersnum}{.\hspace{1ex}}
 %%% increase spacing between entries in toc
 \setlength{\cftparskip}{2ex}
 %%% decrease spacing between number and title as well as indent
-\setlength{\cftfignumwidth}{9ex}
+%\setlength{\cftfignumwidth}{10ex}
+%\setlength{\cfttabnumwidth}{8ex}
+\setlength{\cftfignumwidth}{10.5ex}
 \setlength{\cfttabnumwidth}{8ex}
 \setlength{\cftfigindent}{0ex}
 \setlength{\cfttabindent}{0ex}
@@ -62,13 +65,15 @@
 \renewcommand{\cftloftitlefont}{\hfill\normalsize\MakeUppercase}
 \renewcommand{\cftafterloftitle}{\hfill}
 %% this package binds all indices to toc
-\usepackage{tocbibind}
+\usepackage[nottoc]{tocbibind}
 %%% remove toc numbering
 \makeatletter
 \let\latexl@section\l@section
 \def\l@section#1#2{\begingroup\let\numberline\@gobble\latexl@section{#1}{#2}\endgroup}
 \let\latexl@subsection\l@subsection
 \def\l@subsection#1#2{\begingroup\let\numberline\@gobble\latexl@subsection{#1}{#2}\endgroup}
+\let\latexl@subsubsection\l@subsubsection
+\def\l@subsubsection#1#2{\begingroup\let\numberline\@gobble\latexl@subsubsection{#1}{#2}\endgroup}
 \makeatother
 %% set figure path
 \usepackage{graphicx}
